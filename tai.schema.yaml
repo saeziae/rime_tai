@@ -1,0 +1,57 @@
+﻿#Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: tai
+  name: "Tai"
+  version: "20220225"
+  author:
+    - saeziae <i@estelsa.cn>
+  description: ""
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ ᨠ, A ]
+    
+engine:
+  processors:
+    - ascii_composer
+    - key_binder
+    - speller
+    - selector
+    - punctuator
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - table_translator
+    
+speller:
+  alphabet: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`1234567890`~;:'"
+  delimiter: ''
+  #max_code_length: 3
+  auto_select: true
+  #auto_select_unique_candidate: true
+  auto_clear: max_length
+
+translator:
+  dictionary: tai
+  enable_encoder: false
+  enable_user_dict: false
+  enable_sentence: false
+  enable_completion: true
+    
+punctuator:
+  half_shape: &punct
+#  full_shape: *punct
+
+key_binder:
+  bindings:
+    - {when: has_menu, accept: space, send: space}
+    - {when: composing, accept: space, send: Escape}
